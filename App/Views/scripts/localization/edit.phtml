@@ -1,0 +1,168 @@
+<?php if (!$error && $message) : ?>
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i
+                        class="notika-icon notika-close"></i></span></button> <?php echo $message; ?>
+    </div>
+<?php elseif ($error && $message): ?>
+    <div class="alert alert-danger alert-dismissible alert-mg-b-0" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i
+                        class="notika-icon notika-close"></i></span></button> <?php echo $message; ?>
+    </div>
+<?php endif; ?>
+
+<div class="form-element-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="form-element-list">
+                    <div class="basic-tb-hd">
+                        <h2>Localization Add</h2>
+                    </div>
+                    <div class="row">
+                        <form method="POST">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-group">
+                                    <select name="projectId" class="form-control">
+                                        <?php if (!$project): ?>
+                                            <option disabled>No Project</option>
+                                        <?php else: ?>
+                                            <option value="">Select Project</option>
+                                        <?php endif; ?>
+                                        <?php foreach ($project as $projectValue): ?>
+                                            <option value="<?php echo $projectValue['id']; ?>"><?php echo $projectValue['value']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-group">
+                                    <div class="nk-int-st">
+                                        <input type="text" name="project" class="form-control"
+                                               placeholder="Project Name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                <div class="form-group">
+                                    <select name="languageId" class="form-control">
+                                        <?php foreach ($language as $languageValue): ?>
+                                            <option value="<?php echo $languageValue['id']; ?>"><?php echo $languageValue['name']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-group">
+                                    <select name="versionId" class="form-control">
+                                        <?php if (!$version): ?>
+                                            <option disabled>No Version</option>
+                                        <?php else: ?>
+                                            <option value="">Select Version</option>
+                                        <?php endif; ?>
+                                        <?php foreach ($version as $versionValue): ?>
+                                            <option value="<?php echo $versionValue['id']; ?>"><?php echo $versionValue['revision']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                <div class="form-group">
+                                    <div class="nk-int-st">
+                                        <input type="number" name="version" min="0" step="0.01" class="form-control"
+                                               placeholder="Version">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                <div class="form-group">
+                                    <div class="nk-int-st">
+                                        <input type="text" name="key" class="form-control" placeholder="Key">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                <div class="form-group">
+                                    <div class="nk-int-st">
+                                        <input type="text" name="value" class="form-control" placeholder="Value">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <div class="nk-int-st">
+                                        <button type="submit" class="btn btn-primary btn-sm hec-button waves-effect">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<center>
+    <?php include APPLICATION_PATH . "/../vendor/jasongrimes/paginator/examples/pager.phtml"; ?>
+</center>
+<div class="normal-table-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="normal-table-list mg-t-30">
+                    <div class="basic-tb-hd">
+                        <h2>Localization</h2>
+                    </div>
+                    <div class="bsc-tbl-cls">
+                        <table class="table table-cl">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Project Name</th>
+                                <th>Language</th>
+                                <th>Version</th>
+                                <th>Key</th>
+                                <th>Value</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($result as $resultKey => $resultValue): ?>
+                                <tr>
+                                    <td><?php echo $resultKey + 1; ?></td>
+                                    <td><?php echo $resultValue->getName(); ?></td>
+                                    <td><?php echo $resultValue->getLanguage(); ?></td>
+                                    <td><?php echo $resultValue->getVersion(); ?></td>
+                                    <td><?php echo $resultValue->getLocalizationKeyText(); ?></td>
+                                    <td><?php echo $resultValue->getLocalizationValueText(); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('select[name="versionId"]').change(function () {
+            if (this.value) {
+                $('input[name=version]').attr('disabled', true);
+            } else {
+                $('input[name=version]').removeAttr('disabled');
+            }
+        });
+
+        $('select[name="projectId"]').change(function () {
+            if (this.value) {
+                $('input[name=project]').attr('disabled', true);
+            } else {
+                $('input[name=project]').removeAttr('disabled');
+            }
+        });
+    });
+</script>

@@ -1,0 +1,9 @@
+<?php
+if (isset($data['disableLayout']) && $data['disableLayout'] === true) {
+    require_once APPLICATION_PATH . "/Views/scripts/$view.phtml";
+    return;
+}
+
+require_once APPLICATION_PATH . "/Views/layout/header.phtml";
+require_once APPLICATION_PATH . "/Views/scripts/$view.phtml";
+require_once APPLICATION_PATH . "/Views/layout/footer.phtml";

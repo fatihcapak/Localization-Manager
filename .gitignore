@@ -1,0 +1,4 @@
+.idea
+/vendor/*
+composer.lock
+/App/Models/Cache/Data
