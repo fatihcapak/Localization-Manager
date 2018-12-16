@@ -174,7 +174,7 @@ class Localization
 
         $result = $cache->load($cacheId);
         if ($result !== false) {
-            //return $result;
+            return $result;
         }
 
         $version = (float)$version;
