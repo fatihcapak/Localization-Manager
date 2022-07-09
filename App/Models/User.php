@@ -46,6 +46,7 @@ class User
             $session = new \SlimSession\Helper();
             $session->set('user', serialize($user));
             return $user;
+            
         }
 
         return false;
