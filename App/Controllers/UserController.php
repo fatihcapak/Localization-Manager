@@ -16,7 +16,7 @@ class UserController extends \App\Models\AbstractController
                 $userModel = new \App\Models\User();
 
                 if ($userModel->login($username, $password)) {
-                    header('Location: /');
+                    header('Location: /', true, 303);
                     exit;
                 }
             }
