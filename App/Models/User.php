@@ -18,7 +18,8 @@ class User
      */
     public function getCurrentUser()
     {
-        return !empty($_SESSION['user']) ? $_SESSION['user'] : null;
+        $session = new \SlimSession\Helper();
+        return unserialize($session->get('user'));
     }
 
     /**
@@ -42,7 +43,8 @@ class User
     {
         $user = $this->getUserByUsername($username);
         if ($user instanceof \App\Models\Entities\User && $user->getPassword() === md5($password)) {
-            $_SESSION['user'] = $user;
+            $session = new \SlimSession\Helper();
+            $session->set('user', serialize($user));
             return $user;
         }
 
@@ -51,9 +53,7 @@ class User
 
     public function logout()
     {
-        if (!empty($_SESSION['user'])) {
-            unset($_SESSION['user']);
-        }
+        \SlimSession\Helper::destroy();
     }
 
     public function getUsers($page = 1)

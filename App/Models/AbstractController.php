@@ -24,6 +24,11 @@ abstract class AbstractController
      */
     public function __construct()
     {
+        session_start();
+        $container['session'] = function ($container) {
+            return new \SlimSession\Helper;
+        };
+
         $container = static::$app->getContainer();
         $container['view'] = function ($container) {
             return new \Slim\Views\PhpRenderer(APPLICATION_PATH . '/Views/layout');
