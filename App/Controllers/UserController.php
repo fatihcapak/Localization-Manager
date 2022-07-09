@@ -37,7 +37,6 @@ class UserController extends \App\Models\AbstractController
     public function editAction()
     {
         if ($this->currentUser->getRole() != 1) {
-            
             header('Location: /', true, 303);
             exit;
         }

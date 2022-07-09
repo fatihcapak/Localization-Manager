@@ -39,12 +39,12 @@ abstract class AbstractController
         $this->currentUser = (new \App\Models\User())->getCurrentUser();
         if (!$this->currentUser instanceof \App\Models\Entities\User) {
             if ($container->request->getParam('q') !== '/user/login') {
-                header('Location: /user/login');
+                header('Location: /user/login', true, 303);
                 exit;
             }
         } else {
             if ($container->request->getParam('q') == '/user/login') {
-                header('Location: /');
+                header('Location: /', true, 303);
                 exit;
             }
         }
