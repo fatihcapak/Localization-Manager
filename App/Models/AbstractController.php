@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class AbstractController
+abstract class AbstractController
 {
     /**
      * @var \Slim\App
@@ -31,12 +31,7 @@ class AbstractController
 
         $this->view = static::$app->getContainer()->view;
 
-        session_start();
-        $container['session'] = function ($container) {
-            return new \SlimSession\Helper;
-        };
-
-        $this->currentUser = (new \App\Models\User)->getCurrentUser();
+        $this->currentUser = (new \App\Models\User())->getCurrentUser();
         if (!$this->currentUser instanceof \App\Models\Entities\User) {
             if ($container->request->getParam('q') !== '/user/login') {
                 header('Location: /user/login');
